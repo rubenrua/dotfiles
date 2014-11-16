@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get install -y curl git emacs24-nox build-essential && \
         apt-get clean
 
-# Create a Go workspace directory
+# Create a workspace directory
 RUN mkdir -p /workspace
 
 ENTRYPOINT bash
