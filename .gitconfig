@@ -1,8 +1,14 @@
-[alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
 [core]
-	editor = emacs
-
+    editor = /usr/bin/emacs -nw
+[color]
+  ui = auto    
+[user]
+    email = rubenrua@git.com
+    name = rubenrua
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    stat = status
 [push]
-	default = simple
+    default = simple
+[pull]
+    rebase = true
