@@ -1,3 +1,4 @@
+(menu-bar-mode -1)
 (global-font-lock-mode 1)
 
 (setq-default indent-tabs-mode nil)
