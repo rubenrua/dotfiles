@@ -15,3 +15,8 @@
 (require 'paren)
 (setq show-paren-style 'parenthesis)
 (show-paren-mode +1)
+
+;; IDO - Interactively DO things
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
