@@ -4,8 +4,13 @@
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
+;;--------------------
+;;  Use 4 spaces no tabs
+;;--------------------
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq c-basic-offset 4)
+
 
 ;;--------------------
 ;;  MELPA
