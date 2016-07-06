@@ -61,10 +61,11 @@
 ;; more useful.
 ;;(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
-;;--------------------                                                                                                                                                                                                                                                    
-;; My hooks                                                                                                                                                                                                                                                               
-;;--------------------                                                                                                                                                                                                                                                    
+;;--------------------
+;; My hooks
+;;--------------------
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
 ;;--------------------
 ;; My keybindings
 ;;--------------------
