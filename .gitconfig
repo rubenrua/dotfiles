@@ -9,7 +9,7 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     rdiff = diff --relative
     stat = status
-    follow = "!sh -c 'git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
+    follow = "!sh -c 'cd ${GIT_PREFIX:-.} && git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
 [push]
     default = simple
 [pull]
