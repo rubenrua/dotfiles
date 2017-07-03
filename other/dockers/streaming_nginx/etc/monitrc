@@ -1,0 +1,59 @@
+# HTTPd
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost
+    allow localhost        # allow localhost to connect to the server and
+    allow admin:monit      # require user 'admin' with password 'monit'
+
+
+# Process
+check process sbs with pidfile /var/run/galicasterpro/sbs.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/sbs.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/sbs.conf" with timeout 10 seconds
+    every 4 cycles
+
+check process predel with pidfile /var/run/galicasterpro/predel.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/predel.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/predel.conf" with timeout 10 seconds
+    every 4 cycles
+
+check process pptdel with pidfile /var/run/galicasterpro/pptdel.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/pptdel.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/pptdel.conf" with timeout 10 seconds
+    every 4 cycles
+
+check process premas with pidfile /var/run/galicasterpro/premas.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/premas.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/premas.conf" with timeout 10 seconds
+    every 4 cycles
+
+check process pptmas with pidfile /var/run/galicasterpro/pptmas.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/pptmas.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/pptmas.conf" with timeout 10 seconds
+    every 4 cycles
+
+check process localstream with pidfile /var/run/galicasterpro/localstream.pid
+        group streaming
+        start program = "/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/local.conf" with timeout 10 seconds
+        stop program = "/usr/sbin/nginx -s stop -c /etc/galicasterpro/sys/streaming/local.conf" with timeout 10 seconds
+    every 4 cycles
+
+# CDNs
+check file cdn_sbs with path /etc/galicasterpro/sys/streaming/cdn/sbs_cdn.conf
+        if changed timestamp then exec "/opt/teltek/galicasterpro/restartStreaming sbs.conf"
+
+check file cdn_pptdel with path /etc/galicasterpro/sys/streaming/cdn/pptdel_cdn.conf
+        if changed timestamp then exec "/opt/teltek/galicasterpro/restartStreaming pptdel.conf"
+
+check file cdn_pptmas with path /etc/galicasterpro/sys/streaming/cdn/pptmas_cdn.conf
+        if changed timestamp then exec "/opt/teltek/galicasterpro/restartStreaming pptmas.conf"
+
+check file cdn_predel with path /etc/galicasterpro/sys/streaming/cdn/predel_cdn.conf
+        if changed timestamp then exec "/opt/teltek/galicasterpro/restartStreaming predel.conf"
+
+check file cdn_premas with path /etc/galicasterpro/sys/streaming/cdn/premas_cdn.conf
+        if changed timestamp then exec "/opt/teltek/galicasterpro/restartStreaming premas.conf"
