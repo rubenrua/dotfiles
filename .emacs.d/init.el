@@ -1,3 +1,5 @@
+(setq inhibit-startup-message t)
+
 (menu-bar-mode -1)
 (global-font-lock-mode 1)
 
