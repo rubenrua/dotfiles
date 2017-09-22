@@ -24,3 +24,4 @@ RUN cp -R /opt/moodle /var/www/html/ && \
 
 COPY mysqld.cnf /etc/mysql/conf.d/mysqld.cnf
 COPY entrypoint.sh /entrypoint.sh
+COPY config.php /var/www/html/moodle/config.php
