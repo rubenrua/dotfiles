@@ -18,7 +18,7 @@ $CFG->dboptions = array (
         'dbcollation' => 'utf8_unicode_ci',
         );
 
-$CFG->wwwroot   = 'http://172.17.0.2/moodle';
+$CFG->wwwroot   = 'http://docker-moodle/moodle'; // TODO dns docker
 $CFG->dataroot  = '/var/moodledata';
 $CFG->admin     = 'admin';
 

@@ -13,8 +13,8 @@ RUN apt-get update && \
     git clone git://git.moodle.org/moodle.git
 
 RUN cd /opt/moodle && \
-    git branch --track MOODLE_32_STABLE origin/MOODLE_32_STABLE &&\
-    git checkout MOODLE_32_STABLE
+    git branch --track MOODLE_33_STABLE origin/MOODLE_33_STABLE &&\
+    git checkout MOODLE_33_STABLE
 
 RUN cp -R /opt/moodle /var/www/html/ && \
     mkdir /var/moodledata && \
