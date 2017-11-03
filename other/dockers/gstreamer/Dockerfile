@@ -1,30 +1,23 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.10
 
-RUN apt-get update && \
-    apt-get install -y emacs24-nox git build-essential curl python3 python3-pip && \
-    apt-get install -y ninja-build && \
-    apt-get install -y flex bison && \
-    apt-get install -y libglib2.0-dev liborc-0.4-dev && \
-    apt-get install -y libgtk-3-dev && \
-    pip3 install meson && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
-#    apt-get install -y autoconf autopoint && \
+RUN sed -i "s/# deb-src /deb-src /" /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install -y emacs-nox git build-essential curl python3 python3-pip
+RUN apt-get install -y ninja-build
+RUN pip3 install meson
+RUN apt-get build-dep -y gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
+RUN apt-get build-dep -y gstreamer1.0-libav gstreamer1.0-vaapi
+RUN apt-get install -y flex bison
+RUN apt-get install -y autoconf autopoint
 
-
-ADD https://raw.githubusercontent.com/GStreamer/gstreamer/master/scripts/create-uninstalled-setup.sh /create-uninstalled-setup.sh
+#RUN apt-get clean
+#RUN rm -rf /var/lib/apt/lists/*
 
 RUN echo /usr/local/lib/x86_64-linux-gnu >> /etc/ld.so.conf.d/libc-local.conf && ldconfig
 
-ENV GST_BRANCH 1.12
+RUN git clone git://anongit.freedesktop.org/gstreamer/gst-build /root/gst-build
+RUN cd /root/gst-build && mkdir build/ && meson build && ninja -C build/  && ninja -C install
 
-RUN sed -i s/BRANCH=\"master\"/BRANCH=\"${GST_BRANCH}\"/g /create-uninstalled-setup.sh
-RUN chmod +x /create-uninstalled-setup.sh && /create-uninstalled-setup.sh
-RUN /root/gst/gst-${GST_BRANCH}
-RUN mkdir /root/gst/${GST_BRANCH}/gstreamer/build && cd /root/gst/${GST_BRANCH}/gstreamer/build && meson ../ && ninja && ninja install && ldconfig
-RUN mkdir /root/gst/${GST_BRANCH}/gst-plugins-base/build && cd /root/gst/${GST_BRANCH}/gst-plugins-base/build && meson ../ && ninja && ninja install && ldconfig
-RUN mkdir /root/gst/${GST_BRANCH}/gst-plugins-good/build && cd /root/gst/${GST_BRANCH}/gst-plugins-good/build && meson ../ && ninja && ninja install && ldconfig
-RUN mkdir /root/gst/${GST_BRANCH}/gst-plugins-ugly/build && cd /root/gst/${GST_BRANCH}/gst-plugins-ugly/build && meson ../ && ninja && ninja install && ldconfig
-RUN mkdir /root/gst/${GST_BRANCH}/gst-plugins-bad/build && cd /root/gst/${GST_BRANCH}/gst-plugins-bad/build && meson ../ && ninja && ninja install && ldconfig
-RUN mkdir /root/gst/${GST_BRANCH}/gst-libav/build && cd /root/gst/${GST_BRANCH}/gst-libav/build && meson ../ && ninja && ninja install && ldconfig
