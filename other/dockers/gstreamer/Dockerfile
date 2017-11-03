@@ -19,5 +19,5 @@ RUN apt-get install -y autoconf autopoint
 RUN echo /usr/local/lib/x86_64-linux-gnu >> /etc/ld.so.conf.d/libc-local.conf && ldconfig
 
 RUN git clone git://anongit.freedesktop.org/gstreamer/gst-build /root/gst-build
-RUN cd /root/gst-build && mkdir build/ && meson build && ninja -C build/  && ninja -C install
+RUN cd /root/gst-build && mkdir build/ && meson build && ninja -C build/  && ninja -C build/ install
 
