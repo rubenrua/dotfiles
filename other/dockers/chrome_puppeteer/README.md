@@ -8,3 +8,4 @@ Google Chrome Puppeteer
 Note: xhost +
 
 Official docker in: https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
+Other: https://github.com/joelgriffith/browserless/blob/master/Dockerfile
