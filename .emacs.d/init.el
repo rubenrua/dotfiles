@@ -22,6 +22,26 @@
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 ;;--------------------
+;; IVY
+;;--------------------
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-c C-f") 'counsel-git)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c C-r") 'counsel-rg)
+(global-set-key (kbd "C-c r") 'counsel-rg)
+
+;;--------------------
+;; PROJECTILE
+;;--------------------
+(require 'projectile)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
+(setq projectile-project-search-path '("~/src/"))
+(setq projectile-completion-system 'ivy)
+
+;;--------------------
 ;; Highlight matching parentheses
 ;;--------------------
 (require 'paren)
