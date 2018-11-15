@@ -1,5 +1,4 @@
 (setq inhibit-startup-message t)
-
 (menu-bar-mode -1)
 (global-font-lock-mode 1)
 
@@ -15,31 +14,29 @@
 
 
 ;;--------------------
-;;  MELPA
+;;  MELPA USE-PACKAGE and TRY
 ;;--------------------
 (require 'package) ;; You might already have this line
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(package-initialize)
+
+;; Bootstrap `use-package'
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+(use-package try
+    :ensure t)
 
 ;;--------------------
-;; IVY
+;; WHICH-KEY
 ;;--------------------
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-c C-f") 'counsel-git)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c C-r") 'counsel-rg)
-(global-set-key (kbd "C-c r") 'counsel-rg)
-
-;;--------------------
-;; PROJECTILE
-;;--------------------
-(require 'projectile)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(projectile-mode +1)
-(setq projectile-project-search-path '("~/src/"))
-(setq projectile-completion-system 'ivy)
+(use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
 
 ;;--------------------
 ;; Highlight matching parentheses
@@ -50,10 +47,25 @@
 (setq ido-use-filename-at-point 'guess)
 
 ;;--------------------
+;; ACE-WINDOW
+;;--------------------
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+    (global-set-key (kbd "C-x w") 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+    ))
+
+
+;;--------------------
 ;; IDO - Interactively DO things
 ;;--------------------
 (setq
  ido-everywhere t
+ ido-enable-flex-matching t
  ido-auto-merge-work-directories-length 0
  ido-use-filename-at-point 'guess
  ido-use-url-at-point nil           ; don't use url at point (annoying)
@@ -62,7 +74,7 @@
  ido-max-window-height 1
  ido-enable-flex-matching t
  ffap-machine-p-known 'reject)
- 
+
 (ido-mode 1)
 
 (require 'recentf)
@@ -84,6 +96,53 @@
 ;;(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ;;--------------------
+;; COUNSEL AND SWIPER
+;;--------------------
+;; it looks like counsel is a requirement for swiper
+(use-package counsel
+  :ensure t
+  )
+
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :bind (("C-x b" . ivy-switch-buffer))
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-display-style 'fancy))
+
+
+(use-package swiper
+  :ensure try
+  :bind (("C-s" . swiper)
+     ("C-r" . swiper)
+     ("C-c C-r" . ivy-resume)
+     ("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file))
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)
+    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+    ))
+
+
+(global-set-key (kbd "C-x C-g") 'counsel-git)
+(global-set-key (kbd "C-x C-a") 'counsel-ag)
+
+;;--------------------
+;; PROJECTILE
+;;--------------------
+;;(require 'projectile)
+;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;;(projectile-mode +1)
+;;(setq projectile-project-search-path '("~/src/"))
+;;(setq projectile-completion-system 'ivy)
+
+
+;;--------------------
 ;; My hooks
 ;;--------------------
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -93,3 +152,17 @@
 ;;--------------------
 (global-set-key (kbd "C-f") 'dabbrev-expand)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (counsel ace-window which-key try use-package web-mode vimgolf scala-mode rust-mode python-mode projectile php-mode multiple-cursors magit jedi ivy ggtags ggo-mode fiplr emmet-mode dumb-jump auto-complete-clang-async ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
