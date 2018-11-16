@@ -129,6 +129,8 @@
     ))
 
 
+;; - [ ] C-x C-f no magic like ido-find-file
+;; - [ ] C-s C-w and C-s C-r is diff (C-s M-j)
 (global-set-key (kbd "C-x C-g") 'counsel-git)
 (global-set-key (kbd "C-x C-a") 'counsel-ag)
 
