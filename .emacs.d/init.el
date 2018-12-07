@@ -115,8 +115,7 @@
 
 (use-package swiper
   :ensure try
-  :bind (("C-s" . swiper)
-     ("C-r" . swiper)
+  :bind (("C-c C-s" . swiper)
      ("C-c C-r" . ivy-resume)
      ("M-x" . counsel-M-x)
      ("C-x C-f" . counsel-find-file))
@@ -131,8 +130,8 @@
 
 ;; - [ ] C-x C-f no magic like ido-find-file
 ;; - [ ] C-s C-w and C-s C-r is diff (C-s M-j)
-(global-set-key (kbd "C-x C-g") 'counsel-git)
-(global-set-key (kbd "C-x C-a") 'counsel-ag)
+(global-set-key (kbd "C-c C-f") 'counsel-git)
+(global-set-key (kbd "C-c C-r") 'counsel-rg)
 
 ;;--------------------
 ;; PROJECTILE
