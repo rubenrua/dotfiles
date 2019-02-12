@@ -1,4 +1,11 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq inhibit-startup-message t)
+
 (menu-bar-mode -1)
 (global-font-lock-mode 1)
 
@@ -152,7 +159,6 @@
 ;; My keybindings
 ;;--------------------
 (global-set-key (kbd "C-f") 'dabbrev-expand)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -161,6 +167,7 @@
  '(package-selected-packages
    (quote
     (counsel ace-window which-key try use-package web-mode vimgolf scala-mode rust-mode python-mode projectile php-mode multiple-cursors magit jedi ivy ggtags ggo-mode fiplr emmet-mode dumb-jump auto-complete-clang-async ag))))
+ '(package-selected-packages (quote (ac-php php-cs-fixer flycheck-phpstan php-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
