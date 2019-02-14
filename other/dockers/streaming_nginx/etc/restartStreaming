@@ -1,0 +1,3 @@
+#!/bin/bash
+/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/$1 -s stop 
+/usr/sbin/nginx -c /etc/galicasterpro/sys/streaming/$1
