@@ -7,6 +7,7 @@ alias pbpaste='xsel --clipboard --output'
 alias ..='cd ..'
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 # Neat utils
 # From https://twitter.com/mitsuhiko/status/1070784353360318464
