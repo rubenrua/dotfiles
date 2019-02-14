@@ -9,6 +9,8 @@ echo "#RUBENRUA conf" >> ~/.bashrc
 echo ". ~/.bash_rubenrua" >> ~/.bashrc
 ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
 
+ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
+
 sudo ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
 
 
@@ -55,3 +57,8 @@ curl https://sh.rustup.rs -sSf | sh
 echo "source $HOME/.cargo/env" >> ~/.bashrc
 cargo install --force ripgrep bat exa skim
 
+
+# OTHER
+# ========
+# Change alt-tab
+# https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
