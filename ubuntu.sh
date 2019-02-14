@@ -62,3 +62,7 @@ cargo install --force ripgrep bat exa skim
 # ========
 # Change alt-tab
 # https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
+#
+# wmctrl -a $(wmctrl -l | grep -e "@.*: " | cut -c 20-)
+# https://askubuntu.com/questions/441395/keyboard-shortcut-to-focus-on-idle-terminal
+
