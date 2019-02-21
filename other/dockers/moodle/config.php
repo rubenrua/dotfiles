@@ -9,7 +9,7 @@ $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'localhost';
 $CFG->dbname    = 'moodle';
 $CFG->dbuser    = 'moodledude';
-$CFG->dbpass    = 'passwordformoodledude';
+$CFG->dbpass    = 'passwordformoodledude'; //¿1234Moodle?
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
@@ -18,7 +18,7 @@ $CFG->dboptions = array (
         'dbcollation' => 'utf8_unicode_ci',
         );
 
-$CFG->wwwroot   = 'http://docker-moodle/moodle'; // TODO dns docker
+$CFG->wwwroot   = 'http://'. ($_SERVER['HTTP_HOST'] ?? 'docker-moodle') .'/moodle';
 $CFG->dataroot  = '/var/moodledata';
 $CFG->admin     = 'admin';
 
