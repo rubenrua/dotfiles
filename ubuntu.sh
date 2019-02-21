@@ -8,8 +8,8 @@ git clone https://github.com/rubenrua/dotfiles.git ~/Documents/dotfiles
 echo "#RUBENRUA conf" >> ~/.bashrc
 echo ". ~/.bash_rubenrua" >> ~/.bashrc
 ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
-
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
+ln ~/Documents/dotfiles/.mongorc.js ~/.mongorc.js
 
 ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
 ln -s ~/Documents/dotfiles/scripts/ssh /usr/local/bin/ssh
