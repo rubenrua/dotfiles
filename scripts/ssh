@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e #exit on error
+set -u #exit when a variable is unset
+#set -x #print out every command it runs before running it
+
+SSH="/usr/bin/ssh"
+
+if [ $# -eq 0 ]; then
+    x=$(sk --ansi -c 'cat ~/.ssh/config ~/.ssh/teltek_config | grep "^Host " | cut -d" " -f 2');
+    [[ $? -eq 0 ]] && echo ssh "$x"; $SSH "$x" || true
+else
+    $SSH $*
+fi

@@ -11,7 +11,8 @@ ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
 
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
 
-sudo ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
+ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
+ln -s ~/Documents/dotfiles/scripts/ssh /usr/local/bin/ssh
 
 
 #Docker https://docs.docker.com/install/linux/docker-ce/ubuntu/
