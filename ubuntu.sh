@@ -1,7 +1,7 @@
 #WIP
 
 #Base
-sudo apt-get install -y curl wget git emacs-nox build-essential cmake autojump
+sudo apt-get install -y curl wget git emacs-nox build-essential cmake autojump htop
 git clone https://github.com/rubenrua/Notes.git ~/Documents/Notes
 git clone https://github.com/rubenrua/dotfiles.git ~/Documents/dotfiles
 
