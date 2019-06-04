@@ -1,3 +1,5 @@
+EXPORT editor=emacs
+
 alias dockercleanimages="docker image prune"
 alias dockerclean="docker system prune"
 
