@@ -10,6 +10,7 @@
     rdiff = diff --relative
     st = status
     stat = status
+    co = checkout
     follow = "!sh -c 'cd ${GIT_PREFIX:-.} && git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
 [push]
     default = simple
