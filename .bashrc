@@ -1,3 +1,4 @@
+alias e='emacs'
 EXPORT editor=emacs
 
 alias dockercleanimages="docker image prune"

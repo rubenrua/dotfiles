@@ -48,6 +48,7 @@ alias dockerclean="docker system prune"
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
+alias e='emacs'
 EDITOR=emacs
 
 [ -f /usr/share/autojump/autojump.zsh ] && . /usr/share/autojump/autojump.zsh
