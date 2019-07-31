@@ -1,6 +1,7 @@
 #WIP
 
 #Base
+mkdir -p ~/tmp
 sudo apt-get install -y curl wget git emacs-nox build-essential cmake autojump htop
 git clone https://github.com/rubenrua/Notes.git ~/Documents/Notes
 git clone https://github.com/rubenrua/dotfiles.git ~/Documents/dotfiles
@@ -8,16 +9,17 @@ git clone https://github.com/rubenrua/dotfiles.git ~/Documents/dotfiles
 echo "#RUBENRUA conf" >> ~/.bashrc
 echo ". ~/.bash_rubenrua" >> ~/.bashrc
 ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
+ln ~/Documents/dotfiles/.zshrc ~/.zshrc
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
 ln ~/Documents/dotfiles/.mongorc.js ~/.mongorc.js
 ln ~/Documents/dotfiles/.tmux.conf ~/.tmux.conf
 
-ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
-ln -s ~/Documents/dotfiles/scripts/ssh /usr/local/bin/ssh
+sudo ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
+sudo ln -s ~/Documents/dotfiles/scripts/ssh /usr/local/bin/ssh
 
 
 #Docker https://docs.docker.com/install/linux/docker-ce/ubuntu/
-sudo apt-get install -f \
+sudo apt-get install -yf \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -67,4 +69,10 @@ cargo install --force ripgrep bat exa skim
 #
 # wmctrl -a $(wmctrl -l | grep -e "@.*: " | cut -c 20-)
 # https://askubuntu.com/questions/441395/keyboard-shortcut-to-focus-on-idle-terminal
+dconf dump /org/gnome/desktop/wm/keybindings/
+
+dconf write /org/gnome/desktop/wm/keybindings/switch-windows "['<ALT>Tab']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-applications "['<Super>Tab']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['<Shift><Super>Tab']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
 
