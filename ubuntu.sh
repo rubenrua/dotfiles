@@ -76,3 +76,7 @@ dconf write /org/gnome/desktop/wm/keybindings/switch-applications "['<Super>Tab'
 dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['<Shift><Super>Tab']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
 
+
+# Change Firefox configuration
+# https://bugzilla.mozilla.org/show_bug.cgi?id=926249
+# open `about:config` and disable `browser.urlbar.doubleClickSelectsAll`
