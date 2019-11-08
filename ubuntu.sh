@@ -80,3 +80,4 @@ dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift>
 # Change Firefox configuration
 # https://bugzilla.mozilla.org/show_bug.cgi?id=926249
 # open `about:config` and disable `browser.urlbar.doubleClickSelectsAll`
+# open `about:config` and disable `ui.key.menuAccessKeyFocuses`
