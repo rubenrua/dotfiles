@@ -1,7 +1,8 @@
 [core]
     editor = /usr/bin/emacs -nw
+    excludesfile = /home/rgonzalez/.gitignore_global
 [color]
-  ui = auto    
+    ui = auto
 [user]
     email = rubenrua@gmail.com
     name = rubenrua
@@ -12,7 +13,10 @@
     stat = status
     co = checkout
     follow = "!sh -c 'cd ${GIT_PREFIX:-.} && git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
+    git = !exec git
 [push]
     default = simple
 [pull]
     rebase = true
+[diff]
+    noprefix = true
