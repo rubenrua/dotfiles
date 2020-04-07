@@ -9,5 +9,8 @@ help:
 docker.run:
 	docker run -ti --name $(name) --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $(name)
 
+docker.bash:
+	docker run -ti --name $(name) --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $(name) bash
+
 docker.build:
 	docker build -t $(name) .

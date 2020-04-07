@@ -1,6 +1,7 @@
 FROM ubuntu
 
 RUN apt-get update && apt-get install -y firefox
+RUN apt install -y libcanberra-gtk-module libcanberra-gtk3-module sudo
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
