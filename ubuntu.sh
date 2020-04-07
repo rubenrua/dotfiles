@@ -2,7 +2,7 @@
 
 #Base
 mkdir -p ~/tmp
-sudo apt-get install -y curl wget git emacs-nox build-essential cmake autojump htop
+sudo apt-get install -y curl wget git emacs-nox build-essential cmake autojump htop xsel
 git clone https://github.com/rubenrua/Notes.git ~/Documents/Notes
 git clone https://github.com/rubenrua/dotfiles.git ~/Documents/dotfiles
 
@@ -11,6 +11,7 @@ echo ". ~/.bash_rubenrua" >> ~/.bashrc
 ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
 ln ~/Documents/dotfiles/.zshrc ~/.zshrc
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
+ln ~/Documents/dotfiles/.gitignore_global ~/.gitignore_global
 ln ~/Documents/dotfiles/.mongorc.js ~/.mongorc.js
 ln ~/Documents/dotfiles/.tmux.conf ~/.tmux.conf
 
@@ -58,8 +59,8 @@ sudo apt-get install -y ffmpeg vlc \
 
 #Rust
 curl https://sh.rustup.rs -sSf | sh
-echo "source $HOME/.cargo/env" >> ~/.bashrc
-cargo install --force ripgrep bat exa skim
+echo "source $HOME/.cargo/env" >> ~/.bash_rubenrua
+cargo install --force ripgrep bat exa skim fd-find
 
 
 # OTHER
@@ -75,7 +76,6 @@ dconf write /org/gnome/desktop/wm/keybindings/switch-windows "['<ALT>Tab']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-applications "['<Super>Tab']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['<Shift><Super>Tab']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
-
 
 # Change Firefox configuration
 # https://bugzilla.mozilla.org/show_bug.cgi?id=926249
