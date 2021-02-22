@@ -153,7 +153,11 @@
 ;;--------------------
 ;; My hooks
 ;;--------------------
-(add-hook 'before-save-hook 'whitespace-cleanup)
+(defun rr-whitespace-cleanup ()
+  (when (and (stringp buffer-file-name)
+             (not (string-match "\\.md\\'" buffer-file-name)))
+    (command-execute 'whitespace-cleanup)))
+(add-hook 'before-save-hook #'rr-whitespace-cleanup)
 
 ;;--------------------
 ;; My keybindings
