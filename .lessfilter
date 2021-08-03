@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#
+# $Id: lessfilter 761 2007-03-19 15:50:41Z suriya $
+#
+
+# This is the file ~/.lessfilter (Check its permissions)
+# $ ls -l .lessfilter
+# -rwxr-xr-x    1 suriya   users         504 Jun 22 20:36 .lessfilter
+#
+# Read the lesspipe manpage for further details
+
+case "$1" in
+    *.mp4)
+        AtomicParsley "$1" -T 1
+        ;;
+    *.so)
+        readelf -a "$1"
+        ;;
+    *.xcf)
+        file "$1"
+        ;;
+    *.pdf)
+        pdftotext "$1" -
+        ;;
+    *.pdf.gz)
+        TEMPORARY_FILENAME=`tempfile --suffix .pdf`
+        zcat "$1" > ${TEMPORARY_FILENAME}
+        pdftotext ${TEMPORARY_FILENAME} -
+        # rm ${TEMPORARY_FILENAME}
+        ;;
+    *.html)
+        lynx -dump "$1"
+        ;;
+    *.htm)
+        lynx -dump "$1"
+        ;;
+    *.ps.gz)
+        zcat "$1" | ps2ascii -
+        ;;
+    *.ps)
+        ps2ascii "$1"
+        ;;
+    *.dvi)
+        catdvi "$1"
+        ;;
+    *.dvi.gz)
+        zcat "$1" | catdvi -
+        ;;
+    *.ogg)
+        ogginfo "$1"
+        ;;
+    *.doc)
+        catdoc "$1"
+        ;;
+    *)
+        # We don't handle this format.
+        exit 1
+esac
+
+# No further processing by lesspipe necessary
+exit 0

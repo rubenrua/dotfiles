@@ -10,6 +10,7 @@ echo "#RUBENRUA conf" >> ~/.bashrc
 echo ". ~/.bash_rubenrua" >> ~/.bashrc
 ln ~/Documents/dotfiles/.bashrc ~/.bash_rubenrua
 ln ~/Documents/dotfiles/.zshrc ~/.zshrc
+ln ~/Documents/dotfiles/.lessfilter ~/.lessfilter
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
 ln ~/Documents/dotfiles/.gitignore_global ~/.gitignore_global
 ln ~/Documents/dotfiles/.mongorc.js ~/.mongorc.js
@@ -60,7 +61,7 @@ sudo apt-get install -y ffmpeg vlc \
 #Rust
 curl https://sh.rustup.rs -sSf | sh
 echo "source $HOME/.cargo/env" >> ~/.bash_rubenrua
-cargo install --force ripgrep bat exa skim fd-find
+cargo install --force ripgrep bat exa skim fd-find zoxide
 
 
 # OTHER
@@ -81,3 +82,4 @@ dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift>
 # https://bugzilla.mozilla.org/show_bug.cgi?id=926249
 # open `about:config` and disable `browser.urlbar.doubleClickSelectsAll`
 # open `about:config` and disable `ui.key.menuAccessKeyFocuses`
+# open `about:config` and disable `browser.download.useDownloadDir`

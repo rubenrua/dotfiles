@@ -7,7 +7,7 @@ help:
 	@echo 'make docker.build'
 
 docker.run:
-	docker run -ti --name $(name) --rm -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $(name)
+	docker run -ti --name $(name) --rm --device /dev/snd -e DISPLAY=$$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix $(name)
 
 docker.build:
 	docker build -t $(name) .

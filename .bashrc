@@ -18,7 +18,7 @@ alias ..='cd ..'
 alias xl="exa --group-directories-first --classify --git"
 alias xll="xl -l"
 export SKIM_DEFAULT_COMMAND="rg --files || find ."
-alias ske='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="preview.sh -v {}" )"; [[ $? -eq 0 ]] && emacs "$x" || true ; }; f'
+alias ske='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="preview.sh -v {}" -q ${@:-""} )"; [[ $? -eq 0 ]] && emacs "$x" || true ; }; f'
 alias rge='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi -i -c "rg --color=always --line-number \"{}\"" --preview="preview.sh -v {}" )"; [[ $? -eq 0 ]] && emacs "+$(echo $x|cut -d: -f2)" "$(echo $x|cut -d: -f1)" || true ; }; f'
 source /home/rgonzalez/.cargo/env
 

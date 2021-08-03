@@ -52,11 +52,19 @@ alias dockerclean="docker system prune"
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
+alias rg="rg --max-columns 400 --max-columns-preview"
+alias ffmpeg="ffmpeg -hide_banner"
+
+export LESSCLOSE="/usr/bin/lesspipe %s %s"
+export LESSOPEN="| /usr/bin/lesspipe %s"
+
 alias e='emacs'
 EDITOR=emacs
 
-[ -f /usr/share/autojump/autojump.zsh ] && . /usr/share/autojump/autojump.zsh
+alias t='trans es:en'
+
 [ -f ~/.cargo/env ] && . ~/.cargo/env
+eval "$(zoxide init zsh --cmd j)"
 
 
 # Neat utils
@@ -64,7 +72,7 @@ EDITOR=emacs
 # Rust tools bat+exa+ripgrep+skim and https://raw.githubusercontent.com/mitsuhiko/dotfiles/master/helpers/preview.sh
 alias xl="exa --group-directories-first --classify --git"
 alias xll="xl -l"
-alias ske='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="preview.sh -v {}" )"; [[ $? -eq 0 ]] && emacs "$x" || true ; }; f'
+alias ske='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi --preview="preview.sh -v {}" -q ${@:-""} )"; [[ $? -eq 0 ]] && emacs "$x" || true ; }; f'
 alias rge='f(){ x="$(sk --bind "ctrl-p:toggle-preview" --ansi -i -c "rg --color=always --line-number \"{}\"" --preview="preview.sh -v {}" )"; [[ $? -eq 0 ]] && emacs "+$(echo $x|cut -d: -f2)" "$(echo $x|cut -d: -f1)" || true ; }; f'
 export SKIM_DEFAULT_COMMAND="rg --files || find ."
 alias cat=bat

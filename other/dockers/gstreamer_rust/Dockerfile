@@ -1,11 +1,13 @@
-FROM ubuntu:17.04
+FROM ubuntu:20.04
 
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
+ENV TZ=Europe/Madrid
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Deps
 RUN apt-get update
-RUN apt-get install -y sudo emacs-nox git build-essential curl python3 python3-pip
+RUN apt-get install -y sudo emacs-nox git build-essential curl python3 python3-pip libssl-dev
 
 # Rust
 ENV RUSTUP_HOME=/usr/local/rustup \
@@ -28,7 +30,7 @@ RUN set -eux; \
     curl -O "$url"; \
     echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
     chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --default-toolchain 1.22.1; \
+    ./rustup-init -y --no-modify-path ; \
     rm rustup-init; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
     rustup --version; \
@@ -54,13 +56,19 @@ RUN export uid=1000 gid=1000 && \
     mkdir -p /etc/sudoers.d && \
     echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
     echo "developer:x:${uid}:" >> /etc/group && \
+    echo "render:x:133:" >> /etc/group && \
     echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
+    echo "developer:developer" | chpasswd && \
     chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
+    chown ${uid}:${gid} -R /home/developer&& \
+    usermod -a -G root developer && \
+    usermod -a -G video developer && \
+    usermod -a -G render developer
 
 USER developer
 ENV HOME /home/developer
 
-RUN mkdir /root/src && cd /root/src; \
-    git clone https://github.com/sdroege/gst-plugin-rs \
-    git clone https://github.com/sdroege/gstreamer-rs
+RUN mkdir /home/developer/src && cd /home/developer/src; \
+    git clone https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git ; \
+    git clone https://gitlab.freedesktop.org/gstreamer/gstreamer-rs.git ; \
+    cargo install cargo-c
