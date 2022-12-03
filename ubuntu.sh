@@ -14,7 +14,8 @@ ln ~/Documents/dotfiles/.lessfilter ~/.lessfilter
 ln ~/Documents/dotfiles/.gitconfig ~/.gitconfig
 ln ~/Documents/dotfiles/.gitignore_global ~/.gitignore_global
 ln ~/Documents/dotfiles/.mongorc.js ~/.mongorc.js
-ln ~/Documents/dotfiles/.tmux.conf ~/.tmux.conf
+mkdir ~/.config/tmux/tmux.conf
+ln ~/Documents/dotfiles/.tmux.conf ~/.config/tmux/tmux.conf
 
 sudo ln -s ~/Documents/dotfiles/scripts/preview.sh /usr/local/bin/preview.sh
 sudo ln -s ~/Documents/dotfiles/scripts/ssh /usr/local/bin/ssh
