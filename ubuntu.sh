@@ -63,23 +63,3 @@ curl https://sh.rustup.rs -sSf | sh
 echo "source $HOME/.cargo/env" >> ~/.bash_rubenrua
 cargo install --force ripgrep bat exa skim fd-find zoxide gitweb difftastic alacritty https
 
-
-# OTHER
-# ========
-# Change alt-tab
-# https://superuser.com/questions/394376/how-to-prevent-gnome-shells-alttab-from-grouping-windows-from-similar-apps
-#
-# wmctrl -a $(wmctrl -l | grep -e "@.*: " | cut -c 20-)
-# https://askubuntu.com/questions/441395/keyboard-shortcut-to-focus-on-idle-terminal
-dconf dump /org/gnome/desktop/wm/keybindings/
-
-dconf write /org/gnome/desktop/wm/keybindings/switch-windows "['<ALT>Tab']"
-dconf write /org/gnome/desktop/wm/keybindings/switch-applications "['<Super>Tab']"
-dconf write /org/gnome/desktop/wm/keybindings/switch-applications-backward "['<Shift><Super>Tab']"
-dconf write /org/gnome/desktop/wm/keybindings/switch-windows-backward "['<Shift><Alt>Tab']"
-
-# Change Firefox configuration
-# https://bugzilla.mozilla.org/show_bug.cgi?id=926249
-# open `about:config` and disable `browser.urlbar.doubleClickSelectsAll`
-# open `about:config` and disable `ui.key.menuAccessKeyFocuses`
-# open `about:config` and disable `browser.download.useDownloadDir`
