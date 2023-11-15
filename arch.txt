@@ -1,8 +1,7 @@
-pacstrap -K /mnt base linux linux-firmware dhcpcd iwd pipewire pipewire-pulse
+pacstrap -K /mnt base linux linux-firmware dhcpcd iwd grub efibootmgr pipewire pipewire-pulse
 sudo pacman -S emacs-nox firefox git curl wget docker chromium tmux zsh zsh-completions htop ripgrep xsel alacritty ttf-jetbrains-mono man ncdu lshw
 sudo pacman -S meson ninja devhelp base-devel
 sudo pacman -S zoxide bat fd difftastic
 sudo pacman -S ffmpeg gst-plugins-base gst-plugins-good gst-plugins-ugly gstreamer gst-plugins-bad gstreamer-vaapi gst-plugin-va gstreamer-docs
 sudo pacman -S gnome gnome-extra gdm gpaste
 sudo pacman -S libva libva-utils mesa-vdpau libvdpau vdpauinfo radeontop libva-mesa-driver
-

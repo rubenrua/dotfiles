@@ -18,9 +18,9 @@ HISTFILE=~/.zsh_history
 # Use modern completion system
 setopt noautomenu # rr like bash
 
-autoload -Uz compinit
-compinit
-
+### -- # autoload -Uz compinit
+### -- # compinit
+### -- #
 ### -- #
 ### -- # zstyle ':completion:*' auto-description 'specify: %d'
 ### -- # zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -52,8 +52,9 @@ alias dockerclean="docker system prune"
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
-alias rg="rg --max-columns 400 --max-columns-preview"
+alias rg="rg --max-columns 600 --max-columns-preview"
 alias ffmpeg="ffmpeg -hide_banner"
+alias ffprobe="ffprobe -hide_banner"
 
 export LESSCLOSE="/usr/bin/lesspipe %s %s"
 export LESSOPEN="| /usr/bin/lesspipe %s"
@@ -66,6 +67,23 @@ alias t='trans es:en'
 [ -f ~/.cargo/env ] && . ~/.cargo/env
 eval "$(zoxide init zsh --cmd j)"
 
+#From https://github.com/ajeetdsouza/zoxide/issues/9#issuecomment-877583678
+_zoxide_zsh_tab_completion() {
+    (( $+compstate )) && compstate[insert]=menu
+    local keyword="${words:2}"
+    local completions=(${(@f)"$(zoxide query -l "$keyword")"})
+
+
+    if [[ ${#completions[@]} == 0 ]]; then
+        _files -/
+    else
+        compadd -U -V z "${(@)completions}"
+    fi
+}
+
+if [ "${+functions[compdef]}" -ne 0 ]; then
+    compdef _zoxide_zsh_tab_completion j 2> /dev/null
+fi
 
 # Neat utils
 # From https://twitter.com/mitsuhiko/status/1070784353360318464

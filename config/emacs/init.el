@@ -1,7 +1,6 @@
 ;; from https://emacs.stackexchange.com/questions/51721/failed-to-download-gnu-archive
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-(package-initialize)
 
 (setq inhibit-startup-message t)
 
@@ -11,20 +10,17 @@
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
-
-;;--------------------
-;;  Use 4 spaces no tabs
-;;--------------------
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default c-basic-offset 4)
-
+(column-number-mode)
+(setq-default show-trailing-whitespace t)
 
 ;;--------------------
 ;;  MELPA USE-PACKAGE and TRY
 ;;--------------------
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file t)
 (require 'package) ;; You might already have this line
 (setq package-enable-at-startup nil)
+(package-initialize)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
@@ -36,6 +32,16 @@
 
 (use-package try
     :ensure t)
+
+
+;;--------------------
+;;  Use 4 spaces no tabs
+;;--------------------
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
+(setq-default js-indent-level 2)
+(setq-default css-indent-offset 2)
 
 ;;--------------------
 ;; WHICH-KEY
@@ -92,6 +98,19 @@
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
     ))
 
+(defun ivy-with-thing-at-point (cmd)
+  (let ((ivy-initial-inputs-alist
+         (list
+          (cons cmd (thing-at-point 'symbol)))))
+    (funcall cmd)))
+
+(defun counsel-rg-current ()
+  "counsel-rg-current."
+  (interactive)
+  (ivy-with-thing-at-point 'counsel-rg))
+
+(global-set-key (kbd "C-c d")  'counsel-rg-current)
+
 ;;--------------------
 ;; dumb-jump-mode
 ;;--------------------
@@ -116,17 +135,24 @@
 ;;--------------------
 (use-package rg
   :ensure)
-(use-package php-mode
+(use-package meson-mode
   :ensure)
+;(use-package php-mode
+;  :ensure)
 (use-package groovy-mode
   :ensure)
 (use-package rust-mode
   :ensure)
+(use-package dockerfile-mode
+  :ensure)
+
 
 
 ;;--------------------
 ;; My hooks
 ;;--------------------
+(rg-enable-default-bindings)
+
 (defun rr-whitespace-cleanup ()
   (when (and (stringp buffer-file-name)
              (not (string-match "\\.md\\'" buffer-file-name)))
@@ -158,6 +184,7 @@
 (global-set-key (kbd "M-p")  'move-line-up)
 (global-set-key (kbd "M-n")  'move-line-down)
 
+
 (defun backward-kill-line (arg)
   "Kill ARG lines backward."
   (interactive "p")
@@ -166,16 +193,7 @@
 
 
 
-;;--------------------------------------
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (dumb-jump which-key use-package try counsel))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+;;-----
+ (setq tags-table-list
+       '("~/.emacs.d" "/home/rgonzalez/projects/gstreamer" "/home/rgonzalez/src/bitbucket.org/fluendo/flu-plugins"))

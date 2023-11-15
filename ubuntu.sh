@@ -62,5 +62,4 @@ sudo apt-get install -y ffmpeg vlc \
 #Rust
 curl https://sh.rustup.rs -sSf | sh
 echo "source $HOME/.cargo/env" >> ~/.bash_rubenrua
-cargo install --force ripgrep bat exa skim fd-find zoxide gitweb difftastic alacritty https
-
+cargo install --force ripgrep bat exa skim fd-find zoxide difftastic hyperfine gitweb alacritty https
