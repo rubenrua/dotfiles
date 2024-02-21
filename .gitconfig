@@ -1,6 +1,6 @@
 [core]
     editor = /usr/bin/emacs -nw
-    excludesfile = /home/rgonzalez/.gitignore_global
+    excludesfile = /home/rubenrua/.gitignore
 [color]
     ui = auto
 [user]
@@ -22,3 +22,8 @@
     rebase = true
 [diff]
     noprefix = true
+    algorithm = histogram
+[protocol "file"]
+    allow = always
+[init]
+    defaultBranch = main
