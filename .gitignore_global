@@ -1,2 +1,7 @@
 TAGS
+venv
 *~
+\#*\#
+# To enable ripgrep in those files
+!.gitlab-ci.yml
+!.github
