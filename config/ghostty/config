@@ -1,0 +1,20 @@
+font-size = 9
+
+copy-on-select = clipboard
+
+keybind = ctrl+t=new_tab
+
+#theme = catppuccin-mocha
+theme = niji
+
+window-theme = ghostty
+window-decoration = false
+gtk-tabs-location = top
+
+
+command = fish
+shell-integration = fish
+
+scrollback-limit = 10_000_000
+
+keybind = alt+zero=goto_tab:10
