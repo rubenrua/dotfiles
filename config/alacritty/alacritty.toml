@@ -1,0 +1,30 @@
+[font]
+size = 9.0
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack Nerd Font Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[window]
+decorations = "None"
+#startup_mode = "Maximized"
+
+[terminal.shell]
+program = "/usr/bin/tmux"
+
+[selection]
+save_to_clipboard = true
+
+[terminal]
