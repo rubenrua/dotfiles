@@ -6,7 +6,7 @@ set -u #exit when a variable is unset
 SSH="/usr/bin/ssh"
 
 if [ $# -eq 0 ]; then
-    x=$(sk --ansi -c 'cat ~/.ssh/config ~/.ssh/teltek_config | grep "^Host " | cut -d" " -f 2');
+    x=$(sk --ansi -c 'cat ~/.ssh/config ~/.ssh/fluendo_config | grep "^Host " | cut -d" " -f 2 | sort');
     [[ $? -eq 0 ]] && echo ssh "$x"; $SSH "$x" || true
 else
     $SSH $*

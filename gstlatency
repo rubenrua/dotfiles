@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import os
+import time
+import shutil
+import subprocess
+import sys
+
+mkdump_path = os.path.expanduser("~/.cache/gstmklatency")
+log = os.path.join(mkdump_path, "gst.log")
+shutil.rmtree(mkdump_path, ignore_errors=True)
+os.makedirs(mkdump_path)
+
+print(f"Logs in {log}")
+environ = os.environ.copy()
+environ["GST_DEBUG_FILE"] = log
+environ["GST_TRACERS"] = "latency(flags=pipeline+element)"
+environ["GST_DEBUG"] = "GST_TRACER:7"
+
+try:
+    subprocess.check_call(sys.argv[1:], env=environ)
+    subprocess.check_call(["gst-stats-1.0", log])
+except:
+    time.sleep(1.0)
+
+
+

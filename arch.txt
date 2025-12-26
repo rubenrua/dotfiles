@@ -5,6 +5,7 @@ sudo pacman -S zoxide bat fd difftastic
 sudo pacman -S ffmpeg gst-plugins-base gst-plugins-good gst-plugins-ugly gstreamer gst-plugins-bad gstreamer-vaapi gst-plugin-va gstreamer-docs
 sudo pacman -S gnome gnome-extra gdm gpaste
 sudo pacman -S libva libva-utils mesa-vdpau libvdpau vdpauinfo radeontop libva-mesa-driver
+sudo pacman -S satty
 
 Fronts:
 

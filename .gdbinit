@@ -22,3 +22,6 @@ set print pretty on
 #handle SIGPIPE nostop noprint pass
 #set non-stop on
 set auto-load safe-path /
+
+#emacs powers
+set annotate 1
