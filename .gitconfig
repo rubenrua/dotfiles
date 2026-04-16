@@ -17,6 +17,10 @@
     co = checkout
     follow = "!sh -c 'cd ${GIT_PREFIX:-.} && git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
     git = !exec git
+    delta = "-c core.pager='delta --side-by-side' diff"
+    dlog = -c diff.external=difft log --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
 [push]
     default = simple
 [pull]

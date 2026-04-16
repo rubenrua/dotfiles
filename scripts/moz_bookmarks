@@ -1,0 +1,57 @@
+#!/bin/bash
+set -e #exit on error
+set -u #exit when a variable is unset
+#set -x #print out every command it runs before running it
+
+# 1. Find the Firefox profile directory (handles random string names)
+FF_DIR="$HOME/.mozilla/firefox"
+# Find the first profile that contains places.sqlite (usually .default or .default-release)
+DB_PATH=$(find "$FF_DIR" -name "places.sqlite" | head -n 1)
+
+if [ -z "$DB_PATH" ]; then
+    echo "Error: Firefox profile not found."
+    exit 1
+fi
+
+# 2. Query the SQLite database
+# Note: We copy the DB to /tmp because Firefox locks the file while running
+QUERY="SELECT moz_bookmarks.title, moz_places.url 
+       FROM moz_bookmarks 
+       JOIN moz_places ON moz_bookmarks.fk = moz_places.id 
+       WHERE moz_bookmarks.title IS NOT NULL AND moz_places.url LIKE 'http%';"
+
+QUERY="SELECT 
+    '[' || COALESCE(k.keyword, ' ') || '] ' || b.title, 
+    p.url 
+FROM moz_bookmarks b
+JOIN moz_places p ON b.fk = p.id
+LEFT JOIN moz_keywords k ON p.id = k.place_id
+WHERE b.title IS NOT NULL AND p.url LIKE 'http%';"
+
+QUERY="SELECT 
+    CASE 
+        WHEN k.keyword IS NOT NULL THEN '[' || k.keyword || '] ' || b.title 
+        ELSE b.title 
+    END, 
+    p.url 
+FROM moz_bookmarks b
+JOIN moz_places p ON b.fk = p.id
+LEFT JOIN moz_keywords k ON p.id = k.place_id
+WHERE b.title IS NOT NULL AND p.url LIKE 'http%';"
+
+# Use a temporary copy to avoid "database is locked" errors
+cp "$DB_PATH" /tmp/ff_places_copy.sqlite
+
+# 3. Use skim (sk) to select and open
+# --delimiter splits title and URL; {2} tells Firefox to open the URL part
+selection=$(sqlite3 -separator " | " /tmp/ff_places_copy.sqlite "$QUERY" | \
+    sk --ansi --prompt "Bookmark > " --header "Select a bookmark to open in Firefox")
+
+if [ -n "$selection" ]; then
+    # Extract the URL (the part after the last ' | ')
+    url=$(echo "$selection" | awk -F " | " '{print $NF}')
+    firefox "$url"
+fi
+
+# Cleanup
+rm /tmp/ff_places_copy.sqlite
